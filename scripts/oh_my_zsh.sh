@@ -154,7 +154,6 @@ PLUGINS_LINE='plugins=(
 	zsh-completions
 	zsh-history-substring-search
 	sublime
-	tmux
 )'
 
 if [ -f "$ZSHRC" ]; then

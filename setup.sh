@@ -45,13 +45,11 @@ if ! command -v brew &>/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   # Apple Silicon 与 Intel 兼容路径配置
-#  if [[ -f /opt/homebrew/bin/brew ]]; then
-#    eval "$(/opt/homebrew/bin/brew shellenv)"
-#    grep -qxF 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile \
-#      || echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-#  elif [[ -f /usr/local/bin/brew ]]; then
-#    eval "$(/usr/local/bin/brew shellenv)"
-#  fi
+  if [[ -f /opt/homebrew/bin/brew ]]; then
+    echo >> ~/.zprofile
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv zsh)"' >> ~/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+  fi
 
   info "Homebrew 安装完成"
 else
@@ -109,6 +107,8 @@ CLI_TOOLS=(
   jq
   bat
   uv
+  go
+  python3
 )
 
 section "📦 CLI 工具"
@@ -122,9 +122,14 @@ done
 section "🖥 GUI 工具"
 
 CASK_APPS=(
-#  docker
-#  iterm2
-#  visual-studio-code
+  docker
+  iterm2
+  visual-studio-code
+  pycharm
+  goland
+  postman
+  mongodb-compass
+  google-chrome
 )
 
 for app in "${CASK_APPS[@]+"${CASK_APPS[@]}"}"; do
